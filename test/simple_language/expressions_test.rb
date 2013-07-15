@@ -1,5 +1,4 @@
-gem 'minitest'
-require 'minitest/autorun'
+require_relative '../test_helper.rb'
 require_relative '../../lib/simple_language/expressions.rb'
 
 describe Machine do
