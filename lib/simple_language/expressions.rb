@@ -40,8 +40,8 @@ module Expressions
         
         def sign; '*' end
         
-        #  Reduce always builds a new expression rather than modifying an existing
-        #  one.
+        # Reduce always builds a new expression rather than modifying 
+        # an existing one.
         def reduce(environment)
             if left.reducible?
                 Multiply.new(left.reduce(environment), right)
