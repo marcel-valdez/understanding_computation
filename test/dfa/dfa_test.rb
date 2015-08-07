@@ -8,19 +8,19 @@ describe DFARuleBook do
         initial_state = :state_one
         expected_state = :state_two
         rule = FARule.new(initial_state, 'a', expected_state)
-        rule_book = DFARuleBook.new([rule])
+        rulebook = DFARuleBook.new([rule])
         # act
-        actual_state = rule_book.next_state(initial_state, 'a')
+        actual_state = rulebook.next_state(initial_state, 'a')
         # assert
         actual_state.must_equal expected_state
     end
     
     describe "integration tests" do
-        let(:rule_book) do
+        let(:rulebook) do
             rules = [ FARule.new(1, 'a', 2), FARule.new(1, 'b', 1),
                       FARule.new(2, 'a', 2), FARule.new(2, 'b', 3),
                       FARule.new(3, 'a', 3), FARule.new(3, 'b', 3) ]
-            next rule_book = DFARuleBook.new(rules)
+            next rulebook = DFARuleBook.new(rules)
         end
         
         it 'can run a program' do
@@ -29,7 +29,7 @@ describe DFARuleBook do
             [['a', 2, 1], ['a', 2], ['b', 3], ['a', 3]].
                 each {|char, expected_state|
                 # act
-                actual_state = rule_book.next_state current_state, char   
+                actual_state = rulebook.next_state current_state, char   
                 # assert
                 actual_state.must_equal expected_state
                 
@@ -39,7 +39,7 @@ describe DFARuleBook do
         
         it 'can be in non-accepting' do
             # arrange
-            dfa = DFA.new(1, [2, 3], rule_book)
+            dfa = DFA.new(1, [2, 3], rulebook)
             # act
             actual = dfa.accepting?
             # assert
@@ -48,7 +48,7 @@ describe DFARuleBook do
         
         it 'can go to accepting' do
             # arrange
-            dfa = DFA.new(1, [2, 3], rule_book)
+            dfa = DFA.new(1, [2, 3], rulebook)
             # act
             dfa.read_char 'a'
             # assert
@@ -57,7 +57,7 @@ describe DFARuleBook do
         
         it 'can follow a program' do
             # arrange
-            dfa = DFA.new(1, [3], rule_book)
+            dfa = DFA.new(1, [3], rulebook)
             # act
             dfa.read_string 'aaba'
             # assert
@@ -66,8 +66,8 @@ describe DFARuleBook do
         
         it 'matches its design' do
             # arrange
-            dfa_design = DFADesign.new(1, [3], rule_book)
-            dfa = DFA.new(1, [3], rule_book)
+            dfa_design = DFADesign.new(1, [3], rulebook)
+            dfa = DFA.new(1, [3], rulebook)
             dfa.read_string 'aaba'
             expected = dfa.accepting?
             # act

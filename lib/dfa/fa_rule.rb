@@ -2,7 +2,7 @@ class FARule < Struct.new(:state, :character, :next_state)
   def applies_to?(state, character)
     self.state == state and self.character == character
   end
-  
+
   def follow
     next_state
   end
