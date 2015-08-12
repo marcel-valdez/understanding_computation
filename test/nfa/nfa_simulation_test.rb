@@ -3,7 +3,7 @@ require_relative '../../lib/nfa/nfa_simulation.rb'
 require_relative '../../lib/nfa/nfa.rb'
 require_relative '../../lib/dfa/fa_rule.rb'
 
-describe NFARulebook do
+describe NFASimulation do
 
   let(:rules) do
     array = [
